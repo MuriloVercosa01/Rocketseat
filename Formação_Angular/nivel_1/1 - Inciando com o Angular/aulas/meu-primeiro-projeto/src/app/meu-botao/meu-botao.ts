@@ -12,8 +12,6 @@ export class MeuBotao {
     console.log("Método filtrar!")
   }
 
-  limpar() {
-    console.log("Método limpar!")
-  }
+
 
 }
