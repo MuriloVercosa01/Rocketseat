@@ -1,8 +1,8 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { inject, Injectable } from '@angular/core';
 import { TaskCommentsModalComponent } from '../components/task-comments-modal/task-comments-modal.component';
 import { TaskFormModalComponent } from '../components/task-form-modal/task-form-modal.component';
 import { ITaskFormControls } from '../interfaces/task.form-controls.interface';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
