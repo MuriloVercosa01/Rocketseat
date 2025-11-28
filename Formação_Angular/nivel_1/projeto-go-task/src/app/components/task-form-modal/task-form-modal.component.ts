@@ -27,6 +27,7 @@ export class TaskFormModalComponent {
       Validators.minLength(10),
     ]),
   });
+
   onFormSubmit() {
     throw new Error('Method not implemented.');
   }
