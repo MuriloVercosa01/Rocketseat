@@ -1,4 +1,4 @@
-import { ITaskFormControls } from './task.form-controls.interface';
+import { ITaskFormControls } from './task-form-controls-interface';
 
 export interface ITaskFormModalData {
   mode: 'create' | 'edit';
