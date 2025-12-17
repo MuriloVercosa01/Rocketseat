@@ -1,4 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { TaskCommentsModalComponent } from '../components/task-comments-modal/task-comments-modal.component';
 import { TaskFormModalComponent } from '../components/task-form-modal/task-form-modal.component';
 import { inject, Injectable } from '@angular/core';

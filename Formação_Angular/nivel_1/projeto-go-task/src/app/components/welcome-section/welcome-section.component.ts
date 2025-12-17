@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ModalControllerService } from './../../services/modal-controller.service';
 import { DialogRef } from '@angular/cdk/dialog';
-import { TaskFormModalComponent } from '../task-form-modal/task-form-modal.component';
+import { ITaskFormControls } from '../../interfaces/task-form-controls-interface';
+
 @Component({
   selector: 'app-welcome-section',
   imports: [],
@@ -12,6 +13,9 @@ export class WelcomeSectionComponent {
   private readonly _modalControllerService = inject(ModalControllerService);
 
   openNewTaskModal() {
-    this._modalControllerService.openNewTaskModal();
+    const dialogRef = this._modalControllerService.openNewTaskModal();
+    dialogRef.closed.subscribe((taskForm) => {
+      console.log('Tarefa criada:', taskForm);
+    });
   }
 }
