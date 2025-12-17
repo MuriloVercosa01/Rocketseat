@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ModalControllerService } from './../../services/modal-controller.service';
-import { DialogRef } from '@angular/cdk/dialog';
-import { ITaskFormControls } from '../../interfaces/task-form-controls-interface';
 
 @Component({
   selector: 'app-welcome-section',
