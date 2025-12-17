@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ModalControllerService } from './../../services/modal-controller.service';
+import { taskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-welcome-section',
@@ -10,10 +11,15 @@ import { ModalControllerService } from './../../services/modal-controller.servic
 export class WelcomeSectionComponent {
   private readonly _modalControllerService = inject(ModalControllerService);
 
+  private readonly _taskService = inject(taskService);
+
   openNewTaskModal() {
     const dialogRef = this._modalControllerService.openNewTaskModal();
+
     dialogRef.closed.subscribe((taskForm) => {
-      console.log('Tarefa criada:', taskForm);
+      if (taskForm) {
+        this._taskService.addTask(taskForm);
+      }
     });
   }
 }
