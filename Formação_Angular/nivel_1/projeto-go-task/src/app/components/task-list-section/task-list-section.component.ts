@@ -53,11 +53,14 @@ export class TaskListSectionComponent {
         throw Error('Coluna não identificada.');
     }
 
-    //..taskNextstatus, taskId, taskCurrentStatus
+    this._taskService.updateTaskStatus(
+      taskId,
+      taskCurrentStatus,
+      taskNextStatus,
+    );
   }
 
   private moveCardToColumn(event: CdkDragDrop<ITask[]>) {
-    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
