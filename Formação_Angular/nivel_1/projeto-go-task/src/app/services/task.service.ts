@@ -9,7 +9,7 @@ import { TaskStatus } from '../types/task-status';
 @Injectable({
   providedIn: 'root',
 })
-export class taskService {
+export class TaskService {
   //tarefas em A fazer
   private todoTasks$ = new BehaviorSubject<ITask[]>([]);
   readonly todoTasks = this.todoTasks$
@@ -53,6 +53,27 @@ export class taskService {
       currentTaskList.next([...currentTaskListWithoutTask]);
 
       nextTaskList.next([...nextTaskList.value, { ...currentTask }]);
+    }
+  }
+
+  updateTaskNameAndDescription(
+    taskId: string,
+    taskCurrentStatus: TaskStatus,
+    newTaskName: string,
+    newTaskDescription: string,
+  ) {
+    const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);
+    const currentTaskIndex = currentTaskList.value.findIndex(
+      (task) => task.id === taskId,
+    );
+    if (currentTaskIndex > -1) {
+      const updatedTaskList = [...currentTaskList.value];
+      updatedTaskList[currentTaskIndex] = {
+        ...updatedTaskList[currentTaskIndex],
+        name: newTaskName,
+        description: newTaskDescription,
+      };
+      currentTaskList.next(updatedTaskList);
     }
   }
 
