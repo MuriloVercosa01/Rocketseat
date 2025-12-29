@@ -32,16 +32,17 @@ export class TaskCardComponent {
     });
   }
   openTaskCommentsModal() {
-    this.task.comments = [
-      {
-        id: '123',
-        description: 'Meu comentáiro',
-      },
-      {
-        id: '456',
-        description: 'comentário teste',
-      },
-    ];
-    this._modalControllerService.openTaskCommentsModal(this.task);
+    const dialogRef = this._modalControllerService.openTaskCommentsModal(
+      this.task,
+    );
+    dialogRef.closed.subscribe((taskCommentsChanged) => {
+      if (taskCommentsChanged) {
+        this._taskService.updateTaskComments(
+          this.task.id,
+          this.task.status,
+          this.task.comments,
+        );
+      }
+    });
   }
 }
