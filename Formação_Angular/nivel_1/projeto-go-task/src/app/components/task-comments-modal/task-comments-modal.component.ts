@@ -33,6 +33,14 @@ export class TaskCommentsModalComponent {
     this.commentInputRef.nativeElement.focus();
   }
 
+  onRemoveModal(commentId: string) {
+    this._task.comments = this._task.comments.filter(
+      (comment) => comment.id != commentId,
+    );
+
+    this.taskCommentChanged = true;
+  }
+
   onCloseModal() {
     this._dialogRef.close(this.taskCommentChanged);
   }
