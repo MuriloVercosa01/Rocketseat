@@ -12,20 +12,26 @@ import { IComment } from '../interfaces/comment.interface';
 })
 export class TaskService {
   //tarefas em A fazer
-  private todoTasks$ = new BehaviorSubject<ITask[]>([]);
+  private todoTasks$ = new BehaviorSubject<ITask[]>(
+    this.loadTasksfromLocalStorage(TaskStatusEnum.TODO),
+  );
   readonly todoTasks = this.todoTasks$.asObservable().pipe(
     map((todoTasks) => structuredClone(todoTasks)),
     tap((tasks) => this.saveTasksOnLocalStorage(TaskStatusEnum.TODO, tasks)),
   );
   //tarefas em Fazendo
-  private doingTasks$ = new BehaviorSubject<ITask[]>([]);
+  private doingTasks$ = new BehaviorSubject<ITask[]>(
+    this.loadTasksfromLocalStorage(TaskStatusEnum.DOING),
+  );
   readonly doingTasks = this.doingTasks$.asObservable().pipe(
     map((tasks) => structuredClone(tasks)),
     tap((tasks) => this.saveTasksOnLocalStorage(TaskStatusEnum.DOING, tasks)),
   );
 
   //Tarefas em Concluído
-  private doneTasks$ = new BehaviorSubject<ITask[]>([]);
+  private doneTasks$ = new BehaviorSubject<ITask[]>(
+    this.loadTasksfromLocalStorage(TaskStatusEnum.DONE),
+  );
   readonly doneTasks = this.doneTasks$.asObservable().pipe(
     map((tasks) => structuredClone(tasks)),
     tap((tasks) => this.saveTasksOnLocalStorage(TaskStatusEnum.DONE, tasks)),
@@ -111,6 +117,16 @@ export class TaskService {
     );
 
     currentTaskList.next(newTaskList);
+  }
+
+  private loadTasksfromLocalStorage(key: string) {
+    try {
+      const storageTasks = localStorage.getItem(key);
+      return storageTasks ? JSON.parse(storageTasks) : [];
+    } catch (error) {
+      console.error('Erro ao carregar tarefas do localStorage', error);
+      return [];
+    }
   }
 
   private saveTasksOnLocalStorage(key: string, tasks: ITask[]) {
